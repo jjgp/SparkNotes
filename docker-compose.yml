@@ -1,0 +1,12 @@
+version: "3"
+services:
+  sparknotes:
+    env_file:
+      - .env
+    image: almondsh/almond:latest
+    ports:
+      - 4040:4040
+      - 8888:8888
+    volumes:
+      - ./data:/home/jovyan/data
+      - ./notebooks:/home/jovyan/notebooks
