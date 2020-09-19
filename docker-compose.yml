@@ -1,12 +1,13 @@
-version: "3"
+version: "3.4"
 services:
-  sparknotes:
-    env_file:
-      - .env
-    image: almondsh/almond:latest
-    ports:
-      - 4040:4040
-      - 8888:8888
+  polynote:
+    image: polynote/polynote:latest
+    environment:
+      - PYSPARK_ALLOW_INSECURE_GATEWAY=1
     volumes:
-      - ./data:/home/jovyan/data
-      - ./notebooks:/home/jovyan/notebooks
+      - .:/opt/config
+      - ./notebooks:/opt/notebooks
+    ports:
+      - "8192:8192"
+      - "4040-4050:4040-4050"
+    entrypoint: ['./polynote/polynote.py', "--config", "/opt/config/config.yml"]
